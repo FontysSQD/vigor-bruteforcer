@@ -10,7 +10,6 @@ import java.util.concurrent.Executors;
 public class Main {
     private static ExecutorService pool;
     private static RequestTask reqTask;
-    private static RequestClient reqClient;
     private static String configFilePath;
     private static String username;
     private static ArrayList<String> passwords;
@@ -44,18 +43,8 @@ public class Main {
     }
 
     private static void bruteForce() throws IOException {
-        reqClient = new RequestClient(configFilePath);
         for(String s : passwords) {
-            if(reqClient.makeRequest(username, s)) {
-                System.out.println("Password Cracked :    " + s);
-                scanner.nextLine();
-                System.exit(0);
-            }
-            System.out.println(s + " FAILED");
-            reqClient = new RequestClient(configFilePath);
+
         }
-        System.out.println("Password not cracked :(");
-        scanner.nextLine();
-        System.exit(0);
     }
 }

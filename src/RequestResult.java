@@ -1,0 +1,9 @@
+public class RequestResult {
+    String password;
+    boolean correct;
+
+    public RequestResult(String password, boolean correct) {
+        this.password = password;
+        this.correct = correct;
+    }
+}

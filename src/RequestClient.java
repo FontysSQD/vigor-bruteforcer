@@ -2,9 +2,10 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
+import java.util.Observable;
 import java.util.Properties;
 
-public class RequestClient {
+public class RequestClient extends Observable {
     private Properties config;
     private URL url;
     private HttpURLConnection con;
@@ -37,7 +38,8 @@ public class RequestClient {
         return Base64.getEncoder().encodeToString(param.getBytes());
     }
 
-    public boolean makeRequest(String username, String password) throws IOException {
+    public void makeRequest(String username, String password) throws IOException {
+        RequestResult result;
         OutputStream os = con.getOutputStream();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("action=login&formusername=");
@@ -56,9 +58,13 @@ public class RequestClient {
         }
         br.close();
         if(response.toString().toLowerCase().equals("nil")) {
-            return false;
+            result = new RequestResult(password, true);
+            this.setChanged();
+            this.notifyObservers(result);
         } else {
-            return true;
+            result = new RequestResult(password, true);
+            this.setChanged();
+            this.notifyObservers(result);
         }
     }
 
