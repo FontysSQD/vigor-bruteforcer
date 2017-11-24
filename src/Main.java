@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -44,7 +45,32 @@ public class Main {
 
     private static void bruteForce() throws IOException {
         for(String s : passwords) {
-
+            reqTask = new RequestTask(configFilePath) {
+                @Override
+                protected RequestResult call() throws Exception {
+                    makeRequest(username, s);
+                    return result;
+                }
+            };
+            pool.submit(reqTask);
         }
+        pool.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    RequestResult result = reqTask.get();
+                    System.out.println(result.password + "     :     " + result.correct);
+                    if(result.correct) {
+                        System.out.println("Password found:  " + result.password);
+                        scanner.nextLine();
+                        System.exit(0);
+                    }
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

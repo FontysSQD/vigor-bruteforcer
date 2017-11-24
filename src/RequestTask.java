@@ -20,9 +20,5 @@ public abstract class RequestTask extends Task<RequestResult> implements Observe
 
     public void update(Observable o, Object arg) {
         result = (RequestResult) arg;
-        System.out.println(result.password + "   :    " + result.correct);
-        if(result.correct) {
-
-        }
     }
 }
