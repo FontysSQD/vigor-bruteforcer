@@ -1,3 +1,5 @@
+package D4N3;
+
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,9 +9,13 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * 24-11-17
+ * vigor-bruteforcer created by Dane Naebers
+ */
+
 public class Main {
     private static ExecutorService pool;
-    private static RequestTask reqTask;
     private static RequestClient reqClient;
     private static String configFilePath;
     private static String username;

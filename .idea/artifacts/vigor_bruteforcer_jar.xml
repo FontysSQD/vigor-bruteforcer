@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="vigor-bruteforcer:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/vigor_bruteforcer_jar</output-path>
+    <root id="archive" name="vigor-bruteforcer.jar">
+      <element id="module-output" name="vigor-bruteforcer" />
+    </root>
+  </artifact>
+</component>

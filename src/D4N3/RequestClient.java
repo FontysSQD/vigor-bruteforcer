@@ -1,8 +1,15 @@
+package D4N3;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
 import java.util.Properties;
+
+/**
+ * 24-11-17
+ * vigor-bruteforcer created by Dane Naebers
+ */
 
 public class RequestClient {
     private Properties config;
