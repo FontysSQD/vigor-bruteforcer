@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * 25-11-17
+ * vigor-bruteforcer created by Dane Naebers
+ */
 public abstract class RequestTask extends Task<RequestResult> implements Observer {
     private RequestClient reqClient;
     private String username;

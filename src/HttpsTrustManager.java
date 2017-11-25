@@ -4,6 +4,10 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 
+/**
+ * 25-11-17
+ * vigor-bruteforcer created by Dane Naebers
+ */
 public class HttpsTrustManager implements X509TrustManager {
     private static TrustManager[] trustManagers;
     private static final X509Certificate[] _AcceptedIssuers = new X509Certificate[]{};
@@ -20,14 +24,6 @@ public class HttpsTrustManager implements X509TrustManager {
             X509Certificate[] x509Certificates, String s)
             throws java.security.cert.CertificateException {
 
-    }
-
-    public boolean isClientTrusted(X509Certificate[] chain) {
-        return true;
-    }
-
-    public boolean isServerTrusted(X509Certificate[] chain) {
-        return true;
     }
 
     @Override

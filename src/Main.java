@@ -1,37 +1,68 @@
 import javafx.application.Platform;
 
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * 25-11-17
+ * vigor-bruteforcer created by Dane Naebers
+ */
 public class Main {
     private static ExecutorService pool;
     private static RequestTask reqTask;
     private static RequestResult result;
-    private static String configFilePath;
-    private static String username;
+    private static Properties config;
     private static ArrayList<String> passwords;
     private static Scanner scanner;
 
     public static void main(String[] args) throws IOException {
         pool = Executors.newFixedThreadPool(8);
         scanner = new Scanner(System.in);
-	    System.out.println("Enter absolute path of config file:");
-        configFilePath = scanner.nextLine();
-        System.out.println("Enter username");
-        username = scanner.nextLine();
-        System.out.println("Enter absolute path of passwords file:");
-        loadPasswordFile(scanner.nextLine());
-        System.out.println("Press enter to start brute force.");
+        initialize();
+        bruteForce();
+    }
+
+    private static void initialize() throws IOException {
+        System.out.println("Do you want to load a previous config file: y/n");
+        if(scanner.nextLine().toLowerCase().equals("y")) {
+            System.out.println("Enter the absolute path to your config file");
+            loadPropertyFile(scanner.nextLine());
+            loadPasswordFile(config.getProperty("passFilePath"));
+            System.out.println("Press any key to start brute force");
+            scanner.nextLine();
+            bruteForce();
+        }
+        config = new Properties();
+        System.out.println("Enter the Request URL:");
+        config.setProperty("reqUrl", scanner.nextLine());
+        System.out.println("Enter the username");
+        config.setProperty("username", scanner.nextLine());
+        System.out.println("Enter the absolute path of passwords file:");
+        config.setProperty("passFilePath", scanner.nextLine());
+        loadPasswordFile(config.getProperty("passFilePath"));
+        System.out.println("Save these configurations? y/n");
+        if(scanner.nextLine().toLowerCase().equals("y")) {
+            System.out.println("Enter the absolute path of the save location:");
+            saveProperties(scanner.nextLine());
+        }
+        System.out.println("Press any key to start brute force");
         scanner.nextLine();
         bruteForce();
+    }
+
+    private static void loadPropertyFile(String path) {
+        try (FileInputStream is = new FileInputStream(path)) {
+            config = new Properties();
+            config.load(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void loadPasswordFile(String path) {
@@ -47,6 +78,18 @@ public class Main {
         }
     }
 
+    private static void saveProperties(String path) {
+        String fullPath = path + "config.vrbr";
+        try (FileOutputStream fos = new FileOutputStream(fullPath)) {
+            config.store(fos, "vigor-bruteforcer configurations");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     private static void bruteForce() throws IOException {
         int listSize = passwords.size() / 8;
         ArrayList<List<String>> lists = new ArrayList<>();
@@ -55,7 +98,7 @@ public class Main {
         }
 
         for(int i = 0; i < 8; i++) {
-            reqTask = new RequestTask(configFilePath, username, lists.get(i)) {
+            reqTask = new RequestTask(config.getProperty("reqUrl"), config.getProperty("username"), lists.get(i)) {
                 @Override
                 protected RequestResult call() throws Exception {
                     makeRequest();
@@ -65,29 +108,23 @@ public class Main {
             pool.submit(reqTask);
         }
 
-        pool.execute(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    result = reqTask.get();
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            System.out.println(result.password + "     :     " + result.correct);
-                            if(result.correct) {
-                                System.out.println("Password found:  " + result.password);
-                                scanner.nextLine();
-                                System.exit(0);
-                            }
-                        }
-                    });
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-
+        pool.execute(() -> {
+            try {
+                result = reqTask.get();
+                Platform.runLater(() -> {
+                    System.out.println(result.password + "     :     " + result.correct);
+                    if(result.correct) {
+                        System.out.println("Password found:  " + result.password);
+                        scanner.nextLine();
+                        System.exit(0);
+                    }
+                });
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
             }
+
         });
     }
 }

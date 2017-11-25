@@ -3,30 +3,22 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
 import java.util.Observable;
-import java.util.Properties;
 
+/**
+ * 25-11-17
+ * vigor-bruteforcer created by Dane Naebers
+ */
 public class RequestClient extends Observable {
-    private Properties config;
     private URL url;
     private HttpURLConnection con;
 
-    public RequestClient(String configPath) throws IOException {
-        loadPropertyFile(configPath);
-        configureRequestClient();
+    public RequestClient(String reqUrl) throws IOException {
+        configureRequestClient(reqUrl);
     }
 
-    private void loadPropertyFile(String configPath) {
-        try (FileInputStream is = new FileInputStream(configPath)) {
-            config = new Properties();
-            config.load(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void configureRequestClient() throws IOException {
+    private void configureRequestClient(String reqUrl) throws IOException {
         HttpsTrustManager.allowAllSSL();
-        url = new URL(config.getProperty("requestUrl"));
+        url = new URL(reqUrl);
         con = (HttpURLConnection) url.openConnection();
         con.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
         con.setRequestMethod("POST");
@@ -52,7 +44,7 @@ public class RequestClient extends Observable {
 
         StringBuilder response = new StringBuilder();
         BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
-        String line = null;
+        String line;
         while ((line = br.readLine()) != null) {
             response.append(line);
         }
