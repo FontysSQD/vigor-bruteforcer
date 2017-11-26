@@ -10,20 +10,22 @@ import java.util.Observer;
  */
 public abstract class RequestTask extends Task<RequestResult> implements Observer {
     private RequestClient reqClient;
+    private String url;
     private String username;
     private List<String> passwordList;
     public RequestResult result;
 
-    public RequestTask(String path, String username, List<String> passwordList) throws IOException {
+    public RequestTask(String url, String username, List<String> passwordList) throws IOException {
+        this.url = url;
         this.username = username;
         this.passwordList = passwordList;
-        reqClient = new RequestClient(path);
-        reqClient.addObserver(this::update);
     }
 
     public void makeRequest() throws IOException {
         synchronized(this) {
             for(String s : passwordList) {
+                reqClient = new RequestClient(url);
+                reqClient.addObserver(this);
                 reqClient.makeRequest(username, s);
             }
         }

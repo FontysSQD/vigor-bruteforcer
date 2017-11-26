@@ -49,12 +49,12 @@ public class RequestClient extends Observable {
             response.append(line);
         }
         br.close();
-        if(response.toString().toLowerCase().equals("nil")) {
+        if(!response.toString().toLowerCase().equals("nil")) {
             result = new RequestResult(password, true);
             this.setChanged();
             this.notifyObservers(result);
         } else {
-            result = new RequestResult(password, true);
+            result = new RequestResult(password, false);
             this.setChanged();
             this.notifyObservers(result);
         }
