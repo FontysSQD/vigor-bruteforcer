@@ -1,10 +1,5 @@
-import javafx.application.Platform;
-
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -16,7 +11,7 @@ import java.util.concurrent.Executors;
 public class Main {
     private static ExecutorService pool;
     private static RequestTask reqTask;
-    private static RequestResult result;
+    private static Map<String, Result> results;
     private static Properties config;
     private static ArrayList<String> passwords;
     private static Scanner scanner;
@@ -101,9 +96,9 @@ public class Main {
         for (int i = 0; i < 1; i++) {
             reqTask = new RequestTask(config.getProperty("reqUrl"), config.getProperty("username"), lists.get(i)) {
                 @Override
-                protected RequestResult call() throws Exception {
+                protected Map<String, Result> call() throws Exception {
                     makeRequest();
-                    return this.result;
+                    return this.results;
                 }
             };
             pool.submit(reqTask);
@@ -111,13 +106,18 @@ public class Main {
 
         pool.execute(() -> {
             try {
-                result = reqTask.get();
-                System.out.println(result.password + "     :     " + result.correct);
-                if (result.correct) {
-                    System.out.println("Password found:  " + result.password);
-                    scanner.nextLine();
-                    System.exit(0);
+                results = new HashMap<>();
+                results.putAll(reqTask.get());
+                for(String s : results.keySet())
+                {
+                    System.out.println(s + "     :     " + results.get(s));
+                    if (results.get(s) == Result.TRUE) {
+                        System.out.println("Password found:  " + s);
+                        scanner.nextLine();
+                        System.exit(0);
+                    }
                 }
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             } catch (ExecutionException e) {

@@ -1,21 +1,20 @@
 import javafx.concurrent.Task;
 import java.io.IOException;
-import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 /**
  * 25-11-17
  * vigor-bruteforcer created by Dane Naebers
  */
-public abstract class RequestTask extends Task<RequestResult> implements Observer {
+public abstract class RequestTask extends Task<Map<String, Result>> implements Observer {
     private RequestClient reqClient;
     private String url;
     private String username;
     private List<String> passwordList;
-    public RequestResult result;
+    public Map<String, Result> results;
 
     public RequestTask(String url, String username, List<String> passwordList) throws IOException {
+        results = new HashMap<>();
         this.url = url;
         this.username = username;
         this.passwordList = passwordList;
@@ -32,6 +31,6 @@ public abstract class RequestTask extends Task<RequestResult> implements Observe
     }
 
     public void update(Observable o, Object arg) {
-        result = (RequestResult) arg;
+        results.putAll((Map) o);
     }
 }

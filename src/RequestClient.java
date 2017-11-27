@@ -2,6 +2,8 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 
 /**
@@ -11,6 +13,7 @@ import java.util.Observable;
 public class RequestClient extends Observable {
     private URL url;
     private HttpURLConnection con;
+    public  Map<String, Result> result;
 
     public RequestClient(String reqUrl) throws IOException {
         configureRequestClient(reqUrl);
@@ -24,6 +27,7 @@ public class RequestClient extends Observable {
         con.setRequestMethod("POST");
         con.setDoOutput(true);
         con.setDoInput(true);
+        result = new HashMap<>();
     }
 
     private String encodeParam(String param) {
@@ -31,7 +35,6 @@ public class RequestClient extends Observable {
     }
 
     public void makeRequest(String username, String password) throws IOException {
-        RequestResult result;
         OutputStream os = con.getOutputStream();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("action=login&formusername=");
@@ -50,11 +53,11 @@ public class RequestClient extends Observable {
         }
         br.close();
         if(!response.toString().toLowerCase().equals("nil")) {
-            result = new RequestResult(password, true);
+            result.put(password, Result.TRUE);
             this.setChanged();
             this.notifyObservers(result);
         } else {
-            result = new RequestResult(password, false);
+            result.put(password, Result.FALSE);
             this.setChanged();
             this.notifyObservers(result);
         }
