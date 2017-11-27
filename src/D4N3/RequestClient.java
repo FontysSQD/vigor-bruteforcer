@@ -16,23 +16,13 @@ public class RequestClient {
     private URL url;
     private HttpURLConnection con;
 
-    public RequestClient(String configPath) throws IOException {
-        loadPropertyFile(configPath);
-        configureRequestClient();
+    public RequestClient(String requestUrl) throws IOException {
+        configureRequestClient(requestUrl);
     }
 
-    private void loadPropertyFile(String configPath) {
-        try (FileInputStream is = new FileInputStream(configPath)) {
-            config = new Properties();
-            config.load(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void configureRequestClient() throws IOException {
+    private void configureRequestClient(String requestUrl) throws IOException {
         HttpsTrustManager.allowAllSSL();
-        url = new URL(config.getProperty("requestUrl"));
+        url = new URL(requestUrl);
         con = (HttpURLConnection) url.openConnection();
         con.setRequestProperty("Content-Type", "text/plain; charset=utf-8");
         con.setRequestMethod("POST");
