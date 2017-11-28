@@ -92,7 +92,7 @@ public class Main {
         for (int i = 0; i < passwords.size(); i += listSize) {
             lists.add(passwords.subList(i, Math.min(i + listSize, passwords.size())));
         }
-
+/*
         for (int i = 0; i < 1; i++) {
             reqTask = new RequestTask(config.getProperty("reqUrl"), config.getProperty("username"), lists.get(i)) {
                 @Override
@@ -124,5 +124,6 @@ public class Main {
                 e.printStackTrace();
             }
         });
+        */
     }
 }
