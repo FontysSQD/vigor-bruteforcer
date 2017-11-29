@@ -5,12 +5,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -30,11 +29,14 @@ public class MainFX extends Application {
     private Stage stage;
     private Map<String, Result> mainResults;
 
+    private int maxChars;
+    private int passwordsDone;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("vigor-bruteforcer.fxml"));
-        Scene scene = new Scene(root, 600, 444);
+        Scene scene = new Scene(root, 788, 475);
         stage.setResizable(false);
         stage.setTitle("vigor-bruteforcer");
         stage.setScene(scene);
@@ -62,9 +64,12 @@ public class MainFX extends Application {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                for(String s : result.keySet()) {
+                passwordsDone += 1;
+                lblPasswordsDone.setText(String.valueOf(passwordsDone));
+                lblPasswordsLeft.setText(String.valueOf(passwords.size() - passwordsDone));
+                for (String s : result.keySet()) {
                     guiList.getItems().add(s + " = " + result.get(s));
-                    if(result.get(s).equals(Result.TRUE)) {
+                    if (result.get(s).equals(Result.TRUE)) {
                         pool.shutdown();
                     }
                 }
@@ -72,29 +77,17 @@ public class MainFX extends Application {
         });
     }
 
-
-    @FXML
-    private ListView guiList;
-    @FXML
-    private TextField txtUsername;
-    @FXML
-    private TextField txtPwdFilePath;
-    @FXML
-    private TextField txtRequestUrl;
-
-    @FXML
-    protected void startBruteforce(ActionEvent event) throws IOException {
-        reqTasks = new ArrayList<>();
+    private void dictionaryAttack() throws IOException {
         pool = Executors.newFixedThreadPool(8);
-
+        lblPasswordsLeft.setText(String.valueOf(passwords.size()));
         int listSize = passwords.size() / 8;
         ArrayList<List<String>> lists = new ArrayList<>();
         for (int i = 0; i < passwords.size(); i += listSize) {
             lists.add(passwords.subList(i, Math.min(i + listSize, passwords.size())));
         }
 
-        for(int i = 0; i < 8; i++) {
-            reqTasks.add(new RequestTask(this, config.getProperty("reqUrl"), config.getProperty("username"), lists.get(i)) {
+        for (int i = 0; i < 8; i++) {
+            pool.submit(new RequestTask(this, config.getProperty("reqUrl"), config.getProperty("username"), lists.get(i)) {
                 @Override
                 protected Map<String, Result> call() throws Exception {
                     makeRequest();
@@ -103,23 +96,9 @@ public class MainFX extends Application {
             });
         }
 
-        for(RequestTask task : reqTasks) {
-            pool.submit(task);
-        }
-
         pool.execute(new Runnable() {
             @Override
             public void run() {
-                mainResults = new HashMap<>();
-                for(RequestTask task : reqTasks) {
-                    try {
-                        mainResults.putAll(task.get());
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    }
-                }
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
@@ -130,11 +109,83 @@ public class MainFX extends Application {
         });
     }
 
+    private void bruteforceAttack() {
+        String[] TARGET_ALL_UC_LC_AND_NUMBERS = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "a", "B", "b", "C", "c", "D", "d", "E", "e", "F", "f", "G", "g", "H", "h", "I", "i", "J", "j", "K", "k", "L", "l", "M", "m", "N", "n", "O", "o", "P", "p", "Q", "q", "R", "r", "S", "s", "T", "t", "U", "u", "V", "v", "W", "w", "X", "x", "Y", "y", "Z", "z"};
+        for (int i = 0; i < TARGET_ALL_UC_LC_AND_NUMBERS.length; i++) {
+            String password = TARGET_ALL_UC_LC_AND_NUMBERS[i];
+            passwords.add(password);
+            createPassword(TARGET_ALL_UC_LC_AND_NUMBERS, password);
+        }
+        System.out.println("test");
+    }
+
+    private void createPassword(String[] TARGET_ALL_UC_LC_AND_NUMBERS, String password) {
+        if (password.length() < maxChars) {
+            for (int e = 0; e < TARGET_ALL_UC_LC_AND_NUMBERS.length; e++) {
+                String p = password + TARGET_ALL_UC_LC_AND_NUMBERS[e];
+                passwords.add(p);
+                createPassword(TARGET_ALL_UC_LC_AND_NUMBERS, p);
+            }
+        }
+    }
+
+    @FXML
+    private ListView guiList;
+    @FXML
+    private TextField txtUsername;
+    @FXML
+    private TextField txtPwdFilePath;
+    @FXML
+    private TextField txtRequestUrl;
+    @FXML
+    private Label lblPasswordsLeft;
+    @FXML
+    private Label lblPasswordsDone;
+
+    @FXML
+    private ChoiceBox cbMode;
+
+    @FXML
+    private ChoiceBox cbCharPositions;
+
+
+    @FXML
+    public void initialize() {
+        cbMode.getItems().removeAll(cbMode.getItems());
+        cbCharPositions.getItems().removeAll(cbCharPositions.getItems());
+
+        cbMode.getItems().addAll("Use Password File", "Use Bruteforce");
+        cbCharPositions.getItems().addAll("1", "2", "3", "4", "5", "6", "7", "8", "9", "10");
+    }
+
+    @FXML
+    protected void startBruteforce(ActionEvent event) throws IOException {
+        guiList.getItems().clear();
+        lblPasswordsLeft.setText("0");
+        lblPasswordsDone.setText("0");
+        if (cbMode.getValue().equals("Use Password File")) {
+            loadPasswordFile(new File(config.getProperty("passFilePath")));
+            dictionaryAttack();
+        } else if (cbMode.getValue().equals("Use Bruteforce")) {
+            passwords = new ArrayList<>();
+            maxChars = Integer.valueOf(cbCharPositions.getValue().toString());
+            bruteforceAttack();
+        }
+    }
+
+    @FXML
+    protected void stopBruteforce(ActionEvent event) {
+        if (pool != null) {
+            pool.shutdownNow();
+            guiList.getItems().addAll("Attack stopped");
+        }
+    }
+
     @FXML
     protected void loadPasswords(ActionEvent event) {
         File file = new FileChooser().showOpenDialog(stage);
         txtPwdFilePath.setText(file.toString());
-        loadPasswordFile(file);
+        config.setProperty("passFilePath", file.toString());
     }
 
     @FXML
@@ -151,7 +202,6 @@ public class MainFX extends Application {
                 txtRequestUrl.setText(config.getProperty("reqUrl"));
                 txtUsername.setText(config.getProperty("username"));
                 txtPwdFilePath.setText(config.getProperty("passFilePath"));
-                loadPasswordFile(new File(config.getProperty("passFilePath")));
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Load Config");
                 alert.setHeaderText("Config file successfully loaded");
@@ -179,7 +229,7 @@ public class MainFX extends Application {
             );
             File file = chooser.showSaveDialog(stage);
             if (file != null) {
-                try (FileOutputStream fos = new FileOutputStream(file + ".vrbr")) {
+                try (FileOutputStream fos = new FileOutputStream(file)) {
                     config.store(fos, "vigor-bruteforcer configurations");
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Save Config");
