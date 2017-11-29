@@ -1,3 +1,5 @@
+package com.d4n3.vigorbruteforcer;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -9,10 +11,8 @@ import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.swing.*;
 import java.io.*;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -35,7 +35,7 @@ public class MainFX extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("vigor-bruteforcer.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("com/d4n3/vigorbruteforcer/vigor-bruteforcer.fxml"));
         Scene scene = new Scene(root, 788, 475);
         stage.setResizable(false);
         stage.setTitle("vigor-bruteforcer");
@@ -70,7 +70,12 @@ public class MainFX extends Application {
                 for (String s : result.keySet()) {
                     guiList.getItems().add(s + " = " + result.get(s));
                     if (result.get(s).equals(Result.TRUE)) {
-                        pool.shutdown();
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Dictionary Attack");
+                        alert.setHeaderText("Password FOUND!");
+                        alert.setContentText("password =    " + s);
+                        alert.showAndWait();
+
                     }
                 }
             }

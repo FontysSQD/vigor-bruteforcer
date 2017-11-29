@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="vigor-bruteforcer:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/MainFX.java" />
+    <bookmark url="file://$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer/MainFX.java" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0e47f5c0-780c-4bfa-88cd-69a73bcc0d11" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/MainFX.java" afterPath="$PROJECT_DIR$/src/MainFX.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/vigor-bruteforcer.fxml" afterPath="$PROJECT_DIR$/src/vigor-bruteforcer.fxml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/vigor-bruteforcer/vigor-bruteforcer.fxml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/Main.java" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/HttpsTrustManager.java" afterPath="$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer/HttpsTrustManager.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/MainFX.java" afterPath="$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer/MainFX.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/RequestClient.java" afterPath="$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer/RequestClient.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/RequestTask.java" afterPath="$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer/RequestTask.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Result.java" afterPath="$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer/Result.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/vigor-bruteforcer.fxml" afterPath="$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer/vigor-bruteforcer.fxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,52 +35,42 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1830">
-              <caret line="126" column="10" lean-forward="false" selection-start-line="126" selection-start-column="10" selection-end-line="126" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="RequestTask.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/RequestTask.java">
+        <entry file="file://$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer/RequestTask.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="510">
-              <caret line="36" column="38" lean-forward="false" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
+              <caret line="38" column="38" lean-forward="false" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="MainFX.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/MainFX.java">
+        <entry file="file://$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer/MainFX.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="98" column="37" lean-forward="true" selection-start-line="98" selection-start-column="37" selection-end-line="98" selection-end-column="37" />
+            <state relative-caret-position="256">
+              <caret line="78" column="21" lean-forward="true" selection-start-line="78" selection-start-column="21" selection-end-line="78" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3609#3610#0" expanded="true" />
-                <element signature="e#3704#3705#0" expanded="true" />
+                <element signature="e#3878#3879#0" expanded="true" />
+                <element signature="e#3973#3974#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="RequestClient.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/RequestClient.java">
+        <entry file="file://$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer/RequestClient.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
-              <caret line="57" column="39" lean-forward="false" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="39" />
+              <caret line="59" column="39" lean-forward="false" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="vigor-bruteforcer.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/vigor-bruteforcer.fxml">
+        <entry file="file://$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer/vigor-bruteforcer.fxml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
               <caret line="15" column="55" lean-forward="false" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
@@ -122,6 +124,7 @@
         <option value="$PROJECT_DIR$/src/RequestTask.java" />
         <option value="$PROJECT_DIR$/src/vigor-bruteforcer.fxml" />
         <option value="$PROJECT_DIR$/src/MainFX.java" />
+        <option value="$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer/MainFX.java" />
       </list>
     </option>
   </component>
@@ -171,6 +174,12 @@
               <item name="vigor-bruteforcer" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="vigor-bruteforcer" type="b2602c69:ProjectViewProjectNode" />
+              <item name="vigor-bruteforcer" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="vigorbruteforcer" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -180,13 +189,14 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../JSF/Kochfractal" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer" />
       <recent name="C:\Users\Dane\Documents\git_projects\vigor-bruteforcer\src" />
     </key>
   </component>
@@ -279,12 +289,12 @@
       <workItem from="1511877116725" duration="6726000" />
       <workItem from="1511894737962" duration="7241000" />
       <workItem from="1511909828508" duration="885000" />
-      <workItem from="1511945317022" duration="10312000" />
+      <workItem from="1511945317022" duration="10922000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="47514000" />
+    <option name="totallyTimeSpent" value="48124000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="27" width="1853" height="1053" extended-state="6" />
@@ -292,14 +302,14 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3270242" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3270242" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.34595162" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34595162" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3291959" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -371,7 +381,7 @@
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/javafx-src.zip!/javafx/beans/property/ReadOnlyBooleanWrapper.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/javafx-src.zip!/javafx/beans/property/BooleanPropertyBase.java" />
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/javafx-src.zip!/javafx/concurrent/Task.java" />
-    <entry file="file://$PROJECT_DIR$/src/Result.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer/Result.java" />
     <entry file="jar:///usr/lib/jvm/java-8-oracle/javafx-src.zip!/javafx/concurrent/Task.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -427,10 +437,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RequestClient.java">
+    <entry file="file://$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer/RequestClient.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="345">
-          <caret line="57" column="39" lean-forward="false" selection-start-line="57" selection-start-column="33" selection-end-line="57" selection-end-column="39" />
+          <caret line="59" column="39" lean-forward="false" selection-start-line="59" selection-start-column="33" selection-end-line="59" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -451,7 +461,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/vigor-bruteforcer.fxml">
+    <entry file="file://$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer/vigor-bruteforcer.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="15" column="55" lean-forward="false" selection-start-line="15" selection-start-column="55" selection-end-line="15" selection-end-column="55" />
@@ -462,22 +472,22 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RequestTask.java">
+    <entry file="file://$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer/RequestTask.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
-          <caret line="36" column="38" lean-forward="false" selection-start-line="36" selection-start-column="38" selection-end-line="36" selection-end-column="38" />
+          <caret line="38" column="38" lean-forward="false" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/MainFX.java">
+    <entry file="file://$PROJECT_DIR$/src/com/d4n3/vigorbruteforcer/MainFX.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="98" column="37" lean-forward="true" selection-start-line="98" selection-start-column="37" selection-end-line="98" selection-end-column="37" />
+        <state relative-caret-position="256">
+          <caret line="78" column="21" lean-forward="true" selection-start-line="78" selection-start-column="21" selection-end-line="78" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3609#3610#0" expanded="true" />
-            <element signature="e#3704#3705#0" expanded="true" />
+            <element signature="e#3878#3879#0" expanded="true" />
+            <element signature="e#3973#3974#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -488,10 +498,12 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
+          <last-edited>vigor-bruteforcer:jar</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
                 <option value="0.2" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>

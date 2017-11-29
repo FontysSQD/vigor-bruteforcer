@@ -1,3 +1,5 @@
+package com.d4n3.vigorbruteforcer;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;

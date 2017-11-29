@@ -1,3 +1,5 @@
+package com.d4n3.vigorbruteforcer;
+
 import javafx.concurrent.Task;
 import java.io.IOException;
 import java.util.*;

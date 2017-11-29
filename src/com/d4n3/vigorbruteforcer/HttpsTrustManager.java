@@ -1,3 +1,5 @@
+package com.d4n3.vigorbruteforcer;
+
 import javax.net.ssl.*;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
