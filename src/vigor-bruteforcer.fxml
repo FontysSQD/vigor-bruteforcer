@@ -2,26 +2,25 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-
-<?import javafx.scene.control.ListView?>
-<Pane fx:controller="VigorBruteforcerFX" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="444.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainFX">
    <children>
-      <ListView fx:id="guiList" prefHeight="283.0" prefWidth="600.0" />
-      <Button fx:id="btnStart" onAction="#startBruteforce" layoutX="485.0" layoutY="378.0" mnemonicParsing="false" prefHeight="59.0" prefWidth="101.0" text="Start" />
+      <TextField fx:id="txtRequestUrl" layoutX="110.0" layoutY="297.0" />
+      <TextField fx:id="txtUsername" layoutX="110.0" layoutY="336.0" />
+      <TextField fx:id="txtPwdFilePath" layoutX="110.0" layoutY="373.0" onAction="#loadPasswords" promptText="press enter to load file..." />
+      <Button fx:id="btnStart" layoutX="485.0" layoutY="378.0" mnemonicParsing="false" onAction="#startBruteforce" prefHeight="59.0" prefWidth="101.0" text="Start" />
+      <ListView fx:id="guiList" prefHeight="291.0" prefWidth="600.0" />
       <Label layoutX="14.0" layoutY="302.0" text="Request Url" />
-      <TextField fx:id="txtRequestUrl" layoutX="94.0" layoutY="298.0" />
       <Label layoutX="14.0" layoutY="378.0" text="Password File" />
       <Label layoutX="14.0" layoutY="341.0" text="Username" />
-      <TextField fx:id="txtUsername" layoutX="94.0" layoutY="337.0" />
-      <Button fx:id="btnSave" layoutX="14.0" layoutY="413.0" mnemonicParsing="false" onAction="#saveConfig" prefHeight="25.0" prefWidth="95.0" text="Save Config" />
-      <Button fx:id="btnLoad" layoutX="148.0" layoutY="413.0" mnemonicParsing="false" onAction="#loadConfig" prefHeight="25.0" prefWidth="95.0" text="Load Config" />
-      <Label layoutX="281.0" layoutY="302.0" text="Passwords Left:" />
-      <Label layoutX="281.0" layoutY="329.0" text="Passwords Done:" />
-      <Label fx:id="lblPasswordsLeft" layoutX="367.0" layoutY="302.0" text="0" />
-      <Label fx:id="lblPasswordsDone" layoutX="376.0" layoutY="329.0" text="0" />
-      <TextField fx:id="txtPwdFilePath" onAction="#loadPasswords" layoutX="94.0" layoutY="375.0" promptText="press enter to load file..." />
+      <Button fx:id="btnSave" layoutX="14.0" layoutY="413.0" mnemonicParsing="false" onAction="#saveConfig" prefHeight="26.0" prefWidth="118.0" text="Save Config" />
+      <Button fx:id="btnLoad" layoutX="146.0" layoutY="413.0" mnemonicParsing="false" onAction="#loadConfig" prefHeight="26.0" prefWidth="118.0" text="Load Config" />
+      <Label layoutX="300.0" layoutY="302.0" text="Passwords Left:" />
+      <Label layoutX="300.0" layoutY="325.0" text="Passwords Done:" />
+      <Label fx:id="lblPasswordsLeft" layoutX="407.0" layoutY="302.0" text="0" />
+      <Label fx:id="lblPasswordsDone" layoutX="415.0" layoutY="325.0" text="0" />
    </children>
 </Pane>

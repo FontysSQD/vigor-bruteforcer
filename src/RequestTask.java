@@ -1,4 +1,3 @@
-import javafx.application.Application;
 import javafx.concurrent.Task;
 import java.io.IOException;
 import java.util.*;
@@ -8,16 +7,15 @@ import java.util.*;
  * vigor-bruteforcer created by Dane Naebers
  */
 public abstract class RequestTask extends Task<Map<String, Result>> implements Observer {
-    private VigorBruteforcerFX application;
+    private MainFX application;
     private RequestClient reqClient;
     private String url;
     private String username;
     private List<String> passwordList;
-    public Map<String, Result> results;
+    public Map<String, Result> result;
 
-    public RequestTask(VigorBruteforcerFX application, String url, String username, List<String> passwordList) throws IOException {
+    public RequestTask(MainFX application, String url, String username, List<String> passwordList) throws IOException {
         this.application = application;
-        this.results = new HashMap<>();
         this.url = url;
         this.username = username;
         this.passwordList = passwordList;
@@ -34,7 +32,8 @@ public abstract class RequestTask extends Task<Map<String, Result>> implements O
     }
 
     public void update(Observable o, Object arg) {
-        results.putAll((Map) o);
-        application.printResult(results);
+        this.result = new HashMap<>();
+        result.putAll((Map) arg);
+        application.printResult(result);
     }
 }

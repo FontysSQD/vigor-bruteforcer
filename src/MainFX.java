@@ -21,7 +21,7 @@ import java.util.concurrent.Executors;
  * vigor-bruteforcer
  * Created by Dane Naebers on 28-11-2017.
  */
-public class VigorBruteforcerFX extends Application {
+public class MainFX extends Application {
 
     private ExecutorService pool;
     private ArrayList<RequestTask> reqTasks;
@@ -32,8 +32,6 @@ public class VigorBruteforcerFX extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        pool = Executors.newFixedThreadPool(8);
-        reqTasks = new ArrayList<>();
         this.stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("vigor-bruteforcer.fxml"));
         Scene scene = new Scene(root, 600, 444);
@@ -60,13 +58,15 @@ public class VigorBruteforcerFX extends Application {
         }
     }
 
-    public void printResult(Map<String, Result> results) {
+    public void printResult(Map<String, Result> result) {
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
-                guiList.getItems().removeAll();
-                for(String s : results.keySet()) {
-                    guiList.getItems().add(s + "   =   " + results.get(s));
+                for(String s : result.keySet()) {
+                    guiList.getItems().add(s + " = " + result.get(s));
+                    if(result.get(s).equals(Result.TRUE)) {
+                        pool.shutdown();
+                    }
                 }
             }
         });
@@ -84,7 +84,9 @@ public class VigorBruteforcerFX extends Application {
 
     @FXML
     protected void startBruteforce(ActionEvent event) throws IOException {
-        /*
+        reqTasks = new ArrayList<>();
+        pool = Executors.newFixedThreadPool(8);
+
         int listSize = passwords.size() / 8;
         ArrayList<List<String>> lists = new ArrayList<>();
         for (int i = 0; i < passwords.size(); i += listSize) {
@@ -96,7 +98,7 @@ public class VigorBruteforcerFX extends Application {
                 @Override
                 protected Map<String, Result> call() throws Exception {
                     makeRequest();
-                    return this.results;
+                    return this.result;
                 }
             });
         }
@@ -118,13 +120,14 @@ public class VigorBruteforcerFX extends Application {
                         e.printStackTrace();
                     }
                 }
-                printResult(mainResults);
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        guiList.getItems().add("Bruteforce completed!");
+                    }
+                });
             }
         });
-        */
-        Map<String, Result> test = new HashMap<>();
-        test.put("password", Result.FALSE);
-        printResult(test);
     }
 
     @FXML
@@ -176,7 +179,7 @@ public class VigorBruteforcerFX extends Application {
             );
             File file = chooser.showSaveDialog(stage);
             if (file != null) {
-                try (FileOutputStream fos = new FileOutputStream(file)) {
+                try (FileOutputStream fos = new FileOutputStream(file + ".vrbr")) {
                     config.store(fos, "vigor-bruteforcer configurations");
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Save Config");
