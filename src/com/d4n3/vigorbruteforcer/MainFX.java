@@ -35,7 +35,7 @@ public class MainFX extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("com/d4n3/vigorbruteforcer/vigor-bruteforcer.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("vigor-bruteforcer.fxml"));
         Scene scene = new Scene(root, 788, 475);
         stage.setResizable(false);
         stage.setTitle("vigor-bruteforcer");
